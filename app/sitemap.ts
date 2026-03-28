@@ -3,6 +3,8 @@ import { connectDB } from "@/lib/mongodb";
 import Place from "@/models/Place";
 import Blog from "@/models/Blog";
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://visittirupati.online";
 
