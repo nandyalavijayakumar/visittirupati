@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import PlaceCard from "@/components/PlaceCard";
 import Header from "@/components/Header";
@@ -16,7 +16,7 @@ interface Place {
   category?: string;
 }
 
-export default function PlacesPage() {
+function PlacesContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -127,5 +127,24 @@ export default function PlacesPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function PlacesPage() {
+  return (
+    <Suspense fallback={
+      <div>
+        <Header />
+        <div className="min-h-screen pt-20 px-6 pb-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center py-12">
+              <div className="text-xl text-[#8B7355]">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <PlacesContent />
+    </Suspense>
   );
 }
