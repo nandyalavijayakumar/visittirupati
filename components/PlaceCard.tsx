@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface Place {
-  _id: string;
+  _id?: string;
   name: string;
   location: string;
   image: string;

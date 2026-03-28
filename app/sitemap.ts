@@ -1,26 +1,20 @@
 import { MetadataRoute } from "next";
-import { connectDB } from "@/lib/mongodb";
-import Place from "@/models/Place";
-import Blog from "@/models/Blog";
+import { placesData } from "@/data/places-data";
+import { blogsData } from "@/data/blogs-data";
 
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://visittirupati.online";
 
-  await connectDB();
-
-  const places = await Place.find({}).lean();
-  const blogs = await Blog.find({}).lean();
-
-  const placeUrls = places.map((place: any) => ({
+  const placeUrls = placesData.map((place) => ({
     url: `${baseUrl}/places/${place.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
 
-  const blogUrls = blogs.map((blog: any) => ({
+  const blogUrls = blogsData.map((blog) => ({
     url: `${baseUrl}/blog/${blog.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,

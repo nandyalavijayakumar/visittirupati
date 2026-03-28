@@ -1,49 +1,29 @@
 "use client";
 
-import { useEffect, useState, useCallback, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import PlaceCard from "@/components/PlaceCard";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
-
-interface Place {
-  _id: string;
-  name: string;
-  slug: string;
-  location: string;
-  image: string;
-  description: string;
-  category?: string;
-}
+import { placesData } from "@/data/places-data";
 
 function PlacesContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
-  const [places, setPlaces] = useState<Place[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
   const [category, setCategory] = useState(searchParams.get("category") || "");
 
-  const fetchPlaces = useCallback(async () => {
-    setLoading(true);
-    const params = new URLSearchParams();
-    if (searchQuery) params.set("search", searchQuery);
-    if (category) params.set("category", category);
+  const filteredPlaces = placesData.filter((place) => {
+    const matchesSearch = !searchQuery || 
+      place.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      place.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      place.description.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const res = await fetch(`/api/places?${params.toString()}`);
-    const data = await res.json();
-    setPlaces(data);
-    setLoading(false);
-  }, [searchQuery, category]);
-
-  useEffect(() => {
-    const debounceTimer = setTimeout(() => {
-      fetchPlaces();
-    }, 300);
-
-    return () => clearTimeout(debounceTimer);
-  }, [fetchPlaces]);
+    const matchesCategory = !category || place.category === category;
+    
+    return matchesSearch && matchesCategory;
+  });
 
   const clearFilters = () => {
     setSearchQuery("");
@@ -102,14 +82,10 @@ function PlacesContent() {
 
           <AdBanner />
 
-          {loading ? (
-            <div className="text-center py-12">
-              <div className="text-xl text-[#8B7355]">Searching...</div>
-            </div>
-          ) : places.length > 0 ? (
+          {filteredPlaces.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {places.map((place) => (
-                <PlaceCard key={place._id} place={place} />
+              {filteredPlaces.map((place) => (
+                <PlaceCard key={place.slug} place={place} />
               ))}
             </div>
           ) : (

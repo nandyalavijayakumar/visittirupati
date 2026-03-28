@@ -1,21 +1,10 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
-
-async function getBlogs() {
-  const res = await fetch("http://localhost:3000/api/blogs", {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    return [];
-  }
-
-  return res.json();
-}
+import { blogsData } from "@/data/blogs-data";
 
 export default async function BlogPage() {
-  const blogs = await getBlogs();
+  const blogs = blogsData;
 
   return (
     <div>
@@ -36,8 +25,8 @@ export default async function BlogPage() {
 
           {blogs.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {blogs.map((blog: any) => (
-                <Link key={blog._id} href={`/blog/${blog.slug}`}>
+              {blogs.map((blog) => (
+                <Link key={blog.slug} href={`/blog/${blog.slug}`}>
                   <div className="card-traditional cursor-pointer">
                     <img
                       src={blog.image || "https://via.placeholder.com/400x300?text=Blog"}
@@ -61,7 +50,6 @@ export default async function BlogPage() {
           ) : (
             <div className="bg-white rounded-xl shadow-md p-12 text-center border border-[#E0D5C5]">
               <p className="text-[#8B7355] text-lg">No blogs found.</p>
-              <p className="text-[#8B7355] mt-2">Add blogs from the admin panel.</p>
             </div>
           )}
 

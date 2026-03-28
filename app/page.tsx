@@ -1,22 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AdBanner from "@/components/AdBanner";
 import PlaceCard from "@/components/PlaceCard";
+import { placesData } from "@/data/places-data";
 import { blogs } from "@/data/blogs";
 import BlogCard from "@/components/BlogCard";
 
 export default function Home() {
-  const [places, setPlaces] = useState<any[]>([]);
-
-  useEffect(() => {
-    fetch("/api/places")
-      .then((res) => res.json())
-      .then((data) => setPlaces(data));
-  }, []);
-
   return (
     <div>
       <Header />
@@ -35,8 +27,8 @@ export default function Home() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {places.map((place) => (
-            <PlaceCard key={place._id} place={place} />
+          {placesData.slice(0, 6).map((place) => (
+            <PlaceCard key={place.slug} place={place} />
           ))}
         </div>
 
