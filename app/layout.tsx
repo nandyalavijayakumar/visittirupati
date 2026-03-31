@@ -59,9 +59,8 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://exploretirupati.com",
     languages: {
-      en: "https://exploretirupati.com",
+      en: "https://visittirupati.online",
     },
   },
 };
