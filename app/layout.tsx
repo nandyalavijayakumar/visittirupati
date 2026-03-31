@@ -63,6 +63,9 @@ export const metadata: Metadata = {
       en: "https://visittirupati.online",
     },
   },
+  verification: {
+    google: "RInlNn64HA-ZDZN8u_gDVNWRMt0gtL-liT7nPvnfNwQ",
+  },
 };
 
 export default function RootLayout({
