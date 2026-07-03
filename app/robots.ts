@@ -6,14 +6,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin/", "/api/"],
-      },
-      {
-        userAgent: "Googlebot",
-        allow: "/",
-        disallow: ["/admin/"],
+        disallow: [
+          "/admin/",
+          "/api/",
+        ],
       },
     ],
     sitemap: "https://visittirupati.online/sitemap.xml",
+    host: "https://visittirupati.online",
   };
 }

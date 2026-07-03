@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const blogAny = blog as any;
     return {
-      title: blogAny.title,
-      description: blogAny.description?.slice(0, 160),
+      title: `${blogAny.title} - Travel Guide & Tips | Explore Tirupati`,
+      description: blogAny.description?.slice(0, 160) || `Read about ${blogAny.title}. Latest travel tips and guides for Tirupati tourism.`,
       openGraph: {
         title: `${blogAny.title} | Explore Tirupati`,
         description: blogAny.description?.slice(0, 160),
@@ -35,6 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: `${blogAny.title} | Explore Tirupati`,
         description: blogAny.description?.slice(0, 160),
         images: [blogAny.image],
+      },
+      alternates: {
+        canonical: `https://visittirupati.online/blog/${slug}`,
       },
     };
   } catch (error) {

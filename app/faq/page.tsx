@@ -51,12 +51,30 @@ const faqs = [
     answer: "Yes, Tirupati can be visited as a day trip if you're short on time. However, it's recommended to stay at least one night to experience the spiritual ambiance and visit nearby attractions. The temple darshan can take 4-8 hours depending on crowd levels.",
   },
 ];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 
 export default function FAQPage() {
   return (
     <div>
       <Header />
       <div className="min-h-screen pt-20">
+        <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(faqSchema),
+  }}
+/>
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold text-[#800000]">Frequently Asked Questions</h1>
@@ -66,6 +84,9 @@ export default function FAQPage() {
             <p className="text-[#8B7355] mt-4 max-w-2xl mx-auto">
               Find answers to common questions about visiting Tirupati, temple timings, travel tips, and more.
             </p>
+            <p className="text-sm text-gray-500 mt-4">
+  Last Updated: July 2026
+</p>
           </div>
 
           <AdBanner />
@@ -96,14 +117,20 @@ export default function FAQPage() {
 
           <div className="mt-12 bg-gradient-to-r from-[#800000] to-[#B22222] rounded-xl p-8 text-white text-center">
             <h2 className="text-2xl font-bold mb-4">Still have questions?</h2>
-            <p className="mb-6">Contact us through our admin panel or explore our travel blogs for more information.</p>
-            <div className="flex gap-4 justify-center">
+            <p className="mb-6">Need more help planning your Tirupati trip? Visit our Contact page, explore detailed travel blogs, or browse the best tourist places in Tirupati.</p>
+            <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/blog" className="bg-white text-[#800000] px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
                 Read Travel Blogs
               </Link>
               <Link href="/places" className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white/10 transition">
                 Explore Places
               </Link>
+              <Link
+  href="/contact"
+  className="bg-[#FF6F00] text-white px-6 py-2 rounded-lg font-semibold hover:bg-[#E65100] transition"
+>
+  Contact Us
+</Link>
             </div>
           </div>
         </div>

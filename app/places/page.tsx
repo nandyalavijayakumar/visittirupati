@@ -35,7 +35,6 @@ function PlacesContent() {
 
   return (
     <div>
-      <Header />
       <div className="min-h-screen pt-20 px-6 pb-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
@@ -109,13 +108,10 @@ function PlacesContent() {
 export default function PlacesPage() {
   return (
     <Suspense fallback={
-      <div>
-        <Header />
-        <div className="min-h-screen pt-20 px-6 pb-12">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center py-12">
-              <div className="text-xl text-[#8B7355]">Loading...</div>
-            </div>
+      <div className="min-h-screen pt-20 px-6 pb-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center py-12">
+            <div className="text-xl text-[#8B7355]">Loading...</div>
           </div>
         </div>
       </div>

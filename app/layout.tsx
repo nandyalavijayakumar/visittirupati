@@ -58,10 +58,15 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    languages: {
-      en: "https://visittirupati.online",
-    },
+alternates: {
+  canonical: "https://visittirupati.online",
+  languages: {
+    en: "https://visittirupati.online",
+  },
+},
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/icon.svg",
   },
   verification: {
     google: "RInlNn64HA-ZDZN8u_gDVNWRMt0gtL-liT7nPvnfNwQ",

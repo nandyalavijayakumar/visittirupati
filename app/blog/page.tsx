@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import AdBanner from "@/components/AdBanner";
 import { blogsData } from "@/data/blogs-data";
+
+export const metadata: Metadata = {
+  title: "Travel Blogs - Tirupati Tourism Guide & Travel Tips",
+  description: "Read travel blogs and guides about Tirupati - temple visits, best places to explore, travel tips, and local experiences. Your complete travel companion for Tirupati tourism.",
+  keywords: ["Tirupati travel blog", "Tirupati tourism guide", "Tirupati travel tips", "Tirupati travel guide", "Tirupati blog", "Tirupati tourism"],
+};
 
 export default async function BlogPage() {
   const blogs = blogsData;
